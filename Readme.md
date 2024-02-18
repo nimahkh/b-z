@@ -26,8 +26,14 @@ Ensure PostgreSQL is installed and properly configured.
 - Run `npm run migrate && npm run seed` to set up the database schema and initial data.
 - Run `NODE_ENV=development npm run dev` to start both frontend and backend servers.
 
-##### Authentication
+### Authorizing the user
 **Initial Users:** After running migrations and seeders, use user1 or user2 with password 123 for initial login.
+
+| username  | password |
+| ------------- | ------------- |
+| user1  | 123  |
+| user2  | 123  |
+
 **Registration:** New users can sign up through the registration page accessible from the login screen.
 
 ## Architecture & Design Choices
@@ -47,7 +53,14 @@ Docker Integration: Facilitates easy setup and ensures consistent environments a
 
 ### Extra
 - **Creating a new migration**: By running the `npm run migration:create --migration=MigrationName` you can easily crate a new migration
-- **Axios utilities in Frontend**: to improve the network layer. 
+- **Axios utilities in Frontend**: to improve the network layer.
+- There are three card's statuses.
+ 
+| Status color  | meaning |
+| ------------- | ------------- |
+| **$${\color{green}Green}$$**  | Done  |
+| **$${\color{gray}Gray}$$**  | still not done  |
+| **$${\color{red}Red}$$**  | Card is not done and is close to deadline |
 
 ### Project Structure
 
