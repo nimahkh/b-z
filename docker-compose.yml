@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test
+    ports:
+      - "5433:5432"
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/usr/src/backend/app
+      - /usr/src/backend/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: root
+      DB_DATABASE: test
+      DB_HOST: postgres
+      DB_PORT: 5432
+    command: sh -c "npm run migrate && npm run seed && NODE_ENV=development npm run dev"
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/usr/src/frontend/app
+      - /usr/src/frontend/app/node_modules
+    tty: true  
+    ports:
+      - "5177:5177"
+    environment:
+      - PORT=5177 
+    depends_on:
+      - backend
